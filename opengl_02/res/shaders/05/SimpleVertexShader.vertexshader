@@ -1,0 +1,26 @@
+#version 330 core
+// 第一行告诉编译器我们将用OpenGL 3的语法
+
+/*
+第二行声明输入数据
+具体解释一下这一行：
+
+“vec3”在GLSL中是一个三维向量。类似于（但不相同）以前我们用来声明三角形的glm::vec3。最重要的是，如果我们在C++中使用三维向量，那么在GLSL中也使用三维向量。
+
+“layout(location = 0)”指我们用来赋给vertexPosition_modelspace这个属性的缓冲区。每个顶点能有多种属性：位置，一种或多种颜色，一个或多个纹理坐标，等等。OpenGL不知道什么是颜色：它只是看到一个vec3。因此我们必须告诉它，哪个缓冲对应哪个输入。通过将glvertexAttribPointer函数的第一个参数值赋给layout，我们就完成了这一点。参数值“0”并不重要，它可以是12（但是不大于glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &v)）；重要的是两边参数值保持一致。
+
+“vertexPosition_modelspace”这个变量名你可以任取，它将包含每个顶点着色器运行所需的顶点位置值。
+
+“in”的意思是这是一些输入数据。不久我们将会看到“out”关键词。
+*/
+// Input vertex data, different for all executions of this shader.
+layout(location = 0) in vec3 vertexPosition_modelspace;
+
+void main(){
+
+    // gl_Position是为数不多的内置变量之一：你必须赋一个值给它
+    gl_Position.xyz = vertexPosition_modelspace;
+    gl_Position.w = 1.0;
+
+}
+

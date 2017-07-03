@@ -1,0 +1,12 @@
+#version 330 core
+
+// Ouput data
+out vec3 color;
+
+void main()
+{
+// 我们只做一个简单的事：设置每个片断的颜色为红色
+	// Output color = red 
+	color = vec3(1,0,0);
+
+}
